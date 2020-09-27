@@ -1,12 +1,13 @@
 import store from "../app/store";
-import { setAirportSort, setCategorySort, setGateSort, setTaskSort } from "./reportsSlice";
+import { setAirportSort, setCategorySort, setDateSort, setGateSort, setTaskSort, setTurnsSort } from "./reportsSlice";
 
 /**
  * 
  * @param {Array} array to sort
  * @param {String} sortType asc or desc 
+ * @param {String} compare key
  */
-export const airportSort = (array, sortType, compare) => {
+export const textSort = (array, sortType, compare) => {
   const nextSortType = (sortType === 'desc') ? 'asc' : 'desc';
   const collator = new Intl.Collator({ sensitivity: 'base' });
 
@@ -15,7 +16,6 @@ export const airportSort = (array, sortType, compare) => {
       store.dispatch(setAirportSort(nextSortType));
       break;
     case 'gate':
-      console.log('compare', compare, nextSortType);
       store.dispatch(setGateSort(nextSortType));
       break;
     case 'category': 
@@ -30,7 +30,7 @@ export const airportSort = (array, sortType, compare) => {
   return [...array].sort(
     (itemA, itemB) => {
 
-      if (sortType === 'desc') {
+      if (sortType !== 'asc') {
         
         return collator.compare(itemA[compare], itemB[compare]);
       };
@@ -42,7 +42,62 @@ export const airportSort = (array, sortType, compare) => {
       
       return 0;
     });
-
-
-
 }
+
+export const numberSort = (array, sortType, compare) => { 
+  const nextSortType = (sortType === 'desc') ? 'asc' : 'desc';
+
+  store.dispatch(setTurnsSort(nextSortType));
+
+  return [...array].sort(
+    (itemA, itemB) => {
+
+      if (sortType !== 'asc') {
+        
+        return itemB[compare] - itemA[compare];
+      };
+
+      if (sortType === 'asc') {
+
+        return itemA[compare] - itemB[compare];
+      }
+      
+      return 0;
+    });
+}
+
+/**
+ * 
+ * @param {Array} array 
+ * @param {String} sortType asc or desc
+ * @param {String} compare key 
+ */
+export const dateSort = (array, sortType, compare) => {
+
+  const nextSortType = (sortType === 'desc') ? 'asc' : 'desc';
+
+  store.dispatch(setDateSort(nextSortType));
+
+  return [...array].sort(
+    (itemA, itemB) => {
+      const dateA = new Date(itemA[compare]);
+      const dateB = new Date(itemB[compare]);
+
+      console.log('date', dateA - dateB);
+      if (sortType !== 'asc') {
+
+        return dateB - dateA;
+      }
+
+      if (sortType === 'asc') {
+
+        return dateA - dateB;
+      }
+
+      return 0;
+  });
+};
+
+export const timeSort = (array, sortType, compare) {
+  
+}  
