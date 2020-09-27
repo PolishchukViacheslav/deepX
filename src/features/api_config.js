@@ -1,0 +1,1 @@
+export const URL = 'https://api.mockaroo.com/api/d46078b0?count=20&key=186f8040';

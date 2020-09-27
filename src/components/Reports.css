@@ -1,0 +1,57 @@
+.reports {
+  flex: 0.8 1;
+  background-color: green;
+  padding: 10px;
+}
+
+.reports__wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.reports__title {
+  padding: 20px
+}
+
+.reports__table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  width: max-content;
+  padding: 10px;
+}
+
+.table__header {
+  position: sticky;
+  top: 0;
+  background-color: darkgray;
+  border-right: 1px solid black;
+  padding: 0 5px;
+}
+
+.table__icon {
+  vertical-align: middle;
+  padding-left: 3px;
+}
+
+.table__icon {
+  transform: rotate(180deg),
+}
+
+.table__icon:hover {
+  color: grey;
+}
+
+.table__item--active {
+  background-color: grey;
+}
+
+.table__data {
+  border-right: 1px solid black;
+}
+
+.table__row {
+  padding: 0 5px;
+}

@@ -1,0 +1,14 @@
+.App {
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 100vh;
+}
+
+.App__header {
+  padding: 20px;
+  border-bottom: 2px solid grey;
+}
+.App__body {
+  display: flex;
+  height: 100%;
+}

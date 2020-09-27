@@ -1,0 +1,11 @@
+
+.dashboards {
+  flex: 0.2 1;
+  max-width: 260px;
+  padding: 0 2vw;
+  background-color: yellow;
+}
+
+.dashboards__item {
+  padding: 20px 0;
+}
