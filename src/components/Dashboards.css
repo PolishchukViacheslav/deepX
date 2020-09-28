@@ -1,11 +1,16 @@
 
 .dashboards {
   flex: 0.2 1;
+  border-right: 1px solid lightgrey;
   max-width: 260px;
   padding: 0 2vw;
-  background-color: yellow;
 }
 
 .dashboards__item {
   padding: 20px 0;
+}
+
+.dashboards__item--active {
+  padding: 20px 0;
+  text-decoration: underline;
 }

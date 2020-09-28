@@ -1,5 +1,5 @@
 import store from "../app/store";
-import { setAirportSort, setCategorySort, setDateSort, setGateSort, setTaskSort, setTurnsSort } from "./reportsSlice";
+import { setAirportSort, setCategorySort, setDateSort, setGateSort, setPassSort, setTaskSort, setTimeSort, setTurnsSort } from "./reportsSlice";
 
 /**
  * 
@@ -8,7 +8,7 @@ import { setAirportSort, setCategorySort, setDateSort, setGateSort, setTaskSort,
  * @param {String} compare key
  */
 export const textSort = (array, sortType, compare) => {
-  const nextSortType = (sortType === 'desc') ? 'asc' : 'desc';
+  const nextSortType = (sortType !== 'asc') ? 'asc' : 'desc';
   const collator = new Intl.Collator({ sensitivity: 'base' });
 
   switch (compare) {
@@ -45,7 +45,8 @@ export const textSort = (array, sortType, compare) => {
 }
 
 export const numberSort = (array, sortType, compare) => { 
-  const nextSortType = (sortType === 'desc') ? 'asc' : 'desc';
+  const nextSortType = (sortType !== 'asc') ? 'asc' : 'desc';
+
 
   store.dispatch(setTurnsSort(nextSortType));
 
@@ -74,7 +75,7 @@ export const numberSort = (array, sortType, compare) => {
  */
 export const dateSort = (array, sortType, compare) => {
 
-  const nextSortType = (sortType === 'desc') ? 'asc' : 'desc';
+  const nextSortType = (sortType !== 'asc') ? 'asc' : 'desc';
 
   store.dispatch(setDateSort(nextSortType));
 
@@ -83,7 +84,6 @@ export const dateSort = (array, sortType, compare) => {
       const dateA = new Date(itemA[compare]);
       const dateB = new Date(itemB[compare]);
 
-      console.log('date', dateA - dateB);
       if (sortType !== 'asc') {
 
         return dateB - dateA;
@@ -98,6 +98,49 @@ export const dateSort = (array, sortType, compare) => {
   });
 };
 
-export const timeSort = (array, sortType, compare) {
-  
-}  
+export const timeSort = (array, sortType, compare) => {
+  const nextSortType = (sortType !== 'asc') ? 'asc' : 'desc';
+
+  store.dispatch(setTimeSort(nextSortType));
+
+  return [...array].sort(
+    (itemA, itemB) => {
+      const timeA = new Date (`04/29/1987 ${itemA[compare]}`);
+      const timeB = new Date (`04/29/1987 ${itemB[compare]}`);
+
+      if (sortType !== 'asc') {
+
+        return timeB - timeA;
+      }
+
+      if (sortType === 'asc') {
+
+        return timeA - timeB;
+      }
+
+      return 0;
+    }
+  );
+};
+
+export const passSort = (array, sortType, compare) => {
+  const nextSortType = (sortType !== 'asc') ? 'asc' : 'desc';
+
+  store.dispatch(setPassSort(nextSortType));
+
+  return [...array].sort(
+    (itemA, itemB) => {
+
+      if (sortType !== 'asc') {
+
+        return itemA[compare] === itemB[compare] ? 0 : itemA[compare] ? -1 : 1;
+      }
+
+      if (sortType === 'asc') {
+
+        return itemA[compare] === itemB[compare] ? 0 : itemA[compare] ? 1 : -1;
+      }
+      return 0;
+    }
+  );
+};

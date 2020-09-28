@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import data from './features/deepX.json'
 import { getReports, setReports, setValueForSort } from './features/reportsSlice';
