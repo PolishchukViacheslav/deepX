@@ -1,6 +1,7 @@
 {
   "name": "deep_x",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
