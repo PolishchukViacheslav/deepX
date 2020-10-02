@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import data from './features/deepX.json'
 import { getReports, setReports, setValueForSort } from './features/reportsSlice';
 import { useDispatch } from 'react-redux';
@@ -18,13 +20,19 @@ export const App = () => {
   })
 
   return (
-    <div className="App">
-      <h1 className="App__header">DeepX Analytics</h1>
-      <div className="App__body body">
-        <Dashboards />
-        <Reports />
+    <Router>
+      <div className="App">
+        <h1 className="App__header">DeepX Analytics</h1>
+        <div className="App__body body">
+          <Dashboards />
+          <Switch>
+            <Route exact path='/' component={Reports} />
+            <Route exact path='/:sortParams' component={Reports} />
+            {/* <Reports /> */}
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
